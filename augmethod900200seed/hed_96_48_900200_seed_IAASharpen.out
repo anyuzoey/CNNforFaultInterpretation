@@ -1,0 +1,185 @@
+nohup: ignoring input
+]0;IPython: an/all_model_newload in 29.53820776939392 sec
+(1100, 1537, 3174) (1100, 1537, 3174)
+1.0 0.0 True False
+276
+use model HED
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1           [-1, 32, 96, 96]             320
+              ReLU-2           [-1, 32, 96, 96]               0
+           Dropout-3           [-1, 32, 96, 96]               0
+            Conv2d-4           [-1, 32, 96, 96]           9,248
+              ReLU-5           [-1, 32, 96, 96]               0
+           Dropout-6           [-1, 32, 96, 96]               0
+         MaxPool2d-7           [-1, 32, 48, 48]               0
+            Conv2d-8           [-1, 64, 48, 48]          18,496
+              ReLU-9           [-1, 64, 48, 48]               0
+          Dropout-10           [-1, 64, 48, 48]               0
+           Conv2d-11           [-1, 64, 48, 48]          36,928
+             ReLU-12           [-1, 64, 48, 48]               0
+          Dropout-13           [-1, 64, 48, 48]               0
+        MaxPool2d-14           [-1, 64, 24, 24]               0
+           Conv2d-15          [-1, 128, 24, 24]          73,856
+             ReLU-16          [-1, 128, 24, 24]               0
+          Dropout-17          [-1, 128, 24, 24]               0
+           Conv2d-18          [-1, 128, 24, 24]         147,584
+             ReLU-19          [-1, 128, 24, 24]               0
+          Dropout-20          [-1, 128, 24, 24]               0
+           Conv2d-21          [-1, 128, 24, 24]         147,584
+             ReLU-22          [-1, 128, 24, 24]               0
+          Dropout-23          [-1, 128, 24, 24]               0
+        MaxPool2d-24          [-1, 128, 12, 12]               0
+           Conv2d-25          [-1, 256, 12, 12]         295,168
+             ReLU-26          [-1, 256, 12, 12]               0
+          Dropout-27          [-1, 256, 12, 12]               0
+           Conv2d-28          [-1, 256, 12, 12]         590,080
+             ReLU-29          [-1, 256, 12, 12]               0
+          Dropout-30          [-1, 256, 12, 12]               0
+           Conv2d-31          [-1, 256, 12, 12]         590,080
+             ReLU-32          [-1, 256, 12, 12]               0
+          Dropout-33          [-1, 256, 12, 12]               0
+        MaxPool2d-34          [-1, 256, 11, 11]               0
+           Conv2d-35          [-1, 256, 11, 11]         590,080
+             ReLU-36          [-1, 256, 11, 11]               0
+          Dropout-37          [-1, 256, 11, 11]               0
+           Conv2d-38          [-1, 256, 11, 11]         590,080
+             ReLU-39          [-1, 256, 11, 11]               0
+          Dropout-40          [-1, 256, 11, 11]               0
+           Conv2d-41          [-1, 256, 11, 11]         590,080
+             ReLU-42          [-1, 256, 11, 11]               0
+          Dropout-43          [-1, 256, 11, 11]               0
+           Conv2d-44           [-1, 21, 96, 96]             693
+          Dropout-45           [-1, 21, 96, 96]               0
+           Conv2d-46           [-1, 21, 48, 48]           1,365
+          Dropout-47           [-1, 21, 48, 48]               0
+           Conv2d-48           [-1, 21, 24, 24]           2,709
+          Dropout-49           [-1, 21, 24, 24]               0
+           Conv2d-50           [-1, 21, 12, 12]           5,397
+          Dropout-51           [-1, 21, 12, 12]               0
+           Conv2d-52           [-1, 21, 11, 11]           5,397
+          Dropout-53           [-1, 21, 11, 11]               0
+           Conv2d-54            [-1, 1, 96, 96]              22
+           Conv2d-55            [-1, 1, 48, 48]              22
+           Conv2d-56            [-1, 1, 24, 24]              22
+           Conv2d-57            [-1, 1, 12, 12]              22
+           Conv2d-58            [-1, 1, 11, 11]              22
+           Conv2d-59            [-1, 1, 96, 96]               6
+================================================================
+Total params: 3,695,261
+Trainable params: 3,695,261
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.04
+Forward/backward pass size (MB): 35.32
+Params size (MB): 14.10
+Estimated Total Size (MB): 49.45
+----------------------------------------------------------------
+horizontal_splits_number 66
+width_after_pad 3216
+left_pad,right_pad 21 21
+vertical_splits_number 32
+height_after_pad 1584
+top_pad,bottom_pad 23 24
+181029
+181029
+(96, 96)
+read images in 207.21334505081177 sec
+(181029, 96, 96)
+(181029, 96, 96)
+read images in 14.52245020866394 sec
+(181029, 96, 96, 1)
+(181029, 96, 96, 1)
+64317
+64317
+(96, 96)
+read images in 21.735755920410156 sec
+(64317, 96, 96)
+(64317, 96, 96)
+read images in 3.3061318397521973 sec
+(64317, 96, 96, 1)
+(64317, 96, 96, 1)
+X_train (181029, 96, 96, 1)
+X_val (64317, 96, 96, 1)
+Y_train (181029, 96, 96, 1)
+Y_val (64317, 96, 96, 1)
+181029
+read images in 148.27103972434998 sec
+X_train after aug (362058, 96, 96, 1)
+Y_train after aug (362058, 96, 96, 1)
+read images in 170.65451955795288 sec
+X_train (362058, 1, 96, 96)
+X_val (64317, 1, 96, 96)
+Y_train (362058, 1, 96, 96)
+Y_val (64317, 1, 96, 96)
+optimizer = torch.optim.SGD(model.parameters(), lr=1e-6, momentum=0.9, weight_decay=0.0002)
+Validation loss decreased (inf --> 408404.593750).  Saving model ...
+Epoch: 1. Train Loss: 391464.8125. Val Loss: 408404.59375. Train IoU: 0.10732967406511307. Val IoU: 0.11285227537155151. Time: 1116.5842156410217. LR: 1e-06
+EarlyStopping counter: 1 out of 20
+Epoch: 2. Train Loss: 391529.84375. Val Loss: 408471.25. Train IoU: 0.10736652463674545. Val IoU: 0.11285227537155151. Time: 1073.0738852024078. LR: 1e-06
+EarlyStopping counter: 2 out of 20
+Epoch: 3. Train Loss: 391508.25. Val Loss: 408538.25. Train IoU: 0.10736491531133652. Val IoU: 0.11285227537155151. Time: 1107.5860588550568. LR: 1e-06
+EarlyStopping counter: 3 out of 20
+Epoch: 4. Train Loss: 391494.3125. Val Loss: 408464.75. Train IoU: 0.10736925154924393. Val IoU: 0.11285227537155151. Time: 1062.9689483642578. LR: 1e-06
+EarlyStopping counter: 4 out of 20
+Epoch: 5. Train Loss: 391491.09375. Val Loss: 408405.21875. Train IoU: 0.10736703127622604. Val IoU: 0.11285227537155151. Time: 1053.6165888309479. LR: 1e-06
+EarlyStopping counter: 5 out of 20
+Epoch: 6. Train Loss: 391484.6875. Val Loss: 408498.25. Train IoU: 0.1073668822646141. Val IoU: 0.11285227537155151. Time: 1052.3344106674194. LR: 1e-06
+Epoch     6: reducing learning rate of group 0 to 1.0000e-07.
+EarlyStopping counter: 6 out of 20
+Epoch: 7. Train Loss: 391480.65625. Val Loss: 408406.8125. Train IoU: 0.10736960917711258. Val IoU: 0.11285227537155151. Time: 1050.9984865188599. LR: 1e-07
+EarlyStopping counter: 7 out of 20
+Epoch: 8. Train Loss: 391466.90625. Val Loss: 408408.0. Train IoU: 0.10736919939517975. Val IoU: 0.11285227537155151. Time: 1065.9238948822021. LR: 1e-07
+EarlyStopping counter: 8 out of 20
+Epoch: 9. Train Loss: 391464.59375. Val Loss: 408442.0625. Train IoU: 0.10736972838640213. Val IoU: 0.11285227537155151. Time: 1065.864057302475. LR: 1e-07
+EarlyStopping counter: 9 out of 20
+Epoch: 10. Train Loss: 391375.3125. Val Loss: 408425.09375. Train IoU: 0.10735765844583511. Val IoU: 0.11285227537155151. Time: 1050.9822375774384. LR: 1e-07
+EarlyStopping counter: 10 out of 20
+Epoch: 11. Train Loss: 391470.25. Val Loss: 408507.9375. Train IoU: 0.10736724734306335. Val IoU: 0.11285227537155151. Time: 1060.8958978652954. LR: 1e-07
+Validation loss decreased (408404.593750 --> 408394.531250).  Saving model ...
+Epoch: 12. Train Loss: 391468.875. Val Loss: 408394.53125. Train IoU: 0.10736806690692902. Val IoU: 0.11285227537155151. Time: 1055.7515959739685. LR: 1e-07
+Epoch    12: reducing learning rate of group 0 to 1.0000e-08.
+EarlyStopping counter: 1 out of 20
+Epoch: 13. Train Loss: 391461.8125. Val Loss: 408414.40625. Train IoU: 0.10736791789531708. Val IoU: 0.11285227537155151. Time: 1085.1205389499664. LR: 1e-08
+EarlyStopping counter: 2 out of 20
+Epoch: 14. Train Loss: 391460.75. Val Loss: 408434.25. Train IoU: 0.10736905783414841. Val IoU: 0.11285227537155151. Time: 1405.4063365459442. LR: 1e-08
+EarlyStopping counter: 3 out of 20
+Epoch: 15. Train Loss: 391466.21875. Val Loss: 408422.0. Train IoU: 0.10736815631389618. Val IoU: 0.11285227537155151. Time: 1246.378497838974. LR: 1e-08
+EarlyStopping counter: 4 out of 20
+Epoch: 16. Train Loss: 391466.0625. Val Loss: 408428.34375. Train IoU: 0.10736653208732605. Val IoU: 0.11285227537155151. Time: 1244.773716211319. LR: 1e-08
+EarlyStopping counter: 5 out of 20
+Epoch: 17. Train Loss: 391462.40625. Val Loss: 408425.28125. Train IoU: 0.10737064480781555. Val IoU: 0.11285227537155151. Time: 1265.9071879386902. LR: 1e-08
+EarlyStopping counter: 6 out of 20
+Epoch: 18. Train Loss: 391463.625. Val Loss: 408442.28125. Train IoU: 0.10736692696809769. Val IoU: 0.11285227537155151. Time: 1262.986174583435. LR: 1e-08
+EarlyStopping counter: 7 out of 20
+Epoch: 19. Train Loss: 391462.375. Val Loss: 408431.53125. Train IoU: 0.10736905038356781. Val IoU: 0.11285227537155151. Time: 1189.2356646060944. LR: 1e-08
+EarlyStopping counter: 8 out of 20
+Epoch: 20. Train Loss: 391462.59375. Val Loss: 408440.6875. Train IoU: 0.10736840963363647. Val IoU: 0.11285227537155151. Time: 1108.983891248703. LR: 1e-08
+EarlyStopping counter: 9 out of 20
+Epoch: 21. Train Loss: 391464.84375. Val Loss: 408437.125. Train IoU: 0.10736840963363647. Val IoU: 0.11285227537155151. Time: 1170.694667816162. LR: 1e-08
+EarlyStopping counter: 10 out of 20
+Epoch: 22. Train Loss: 391466.125. Val Loss: 408440.46875. Train IoU: 0.1073698028922081. Val IoU: 0.11285227537155151. Time: 1208.8876259326935. LR: 1e-08
+EarlyStopping counter: 11 out of 20
+Epoch: 23. Train Loss: 391464.71875. Val Loss: 408435.46875. Train IoU: 0.107370525598526. Val IoU: 0.11285227537155151. Time: 1153.4109997749329. LR: 1e-08
+EarlyStopping counter: 12 out of 20
+Epoch: 24. Train Loss: 391465.1875. Val Loss: 408437.96875. Train IoU: 0.10736840963363647. Val IoU: 0.11285227537155151. Time: 1309.6654102802277. LR: 1e-08
+EarlyStopping counter: 13 out of 20
+Epoch: 25. Train Loss: 391467.96875. Val Loss: 408441.15625. Train IoU: 0.10736503452062607. Val IoU: 0.11285227537155151. Time: 1311.8735983371735. LR: 1e-08
+EarlyStopping counter: 14 out of 20
+Epoch: 26. Train Loss: 391463.40625. Val Loss: 408440.125. Train IoU: 0.10736914724111557. Val IoU: 0.11285227537155151. Time: 1290.7171030044556. LR: 1e-08
+EarlyStopping counter: 15 out of 20
+Epoch: 27. Train Loss: 391462.46875. Val Loss: 408447.71875. Train IoU: 0.10737337172031403. Val IoU: 0.11285227537155151. Time: 1279.3796784877777. LR: 1e-08
+EarlyStopping counter: 16 out of 20
+Epoch: 28. Train Loss: 391464.5. Val Loss: 408450.875. Train IoU: 0.10737013816833496. Val IoU: 0.11285227537155151. Time: 1261.117505311966. LR: 1e-08
+EarlyStopping counter: 17 out of 20
+Epoch: 29. Train Loss: 391467.8125. Val Loss: 408436.875. Train IoU: 0.10736735165119171. Val IoU: 0.11285227537155151. Time: 1271.8375499248505. LR: 1e-08
+EarlyStopping counter: 18 out of 20
+Epoch: 30. Train Loss: 391465.1875. Val Loss: 408456.6875. Train IoU: 0.10736628621816635. Val IoU: 0.11285227537155151. Time: 1276.4336771965027. LR: 1e-08
+EarlyStopping counter: 19 out of 20
+Epoch: 31. Train Loss: 391466.25. Val Loss: 408444.03125. Train IoU: 0.10737341642379761. Val IoU: 0.11285227537155151. Time: 1262.150871038437. LR: 1e-08
+EarlyStopping counter: 20 out of 20
+Early stopping
+total cost 10.536367713279194 hours
+/home/anyu/anaconda3/lib/python3.6/site-packages/IPython/core/interactiveshell.py:763: UserWarning: Attempting to work in a virtualenv. If you encounter problems, please install IPython inside the virtualenv.
+  warn("Attempting to work in a virtualenv. If you encounter problems, please "

@@ -1,0 +1,74 @@
+]0;IPython: all_model_new/model_zoo----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1           [-1, 32, 92, 92]             320
+              ReLU-2           [-1, 32, 92, 92]               0
+           Dropout-3           [-1, 32, 92, 92]               0
+            Conv2d-4           [-1, 32, 92, 92]           9,248
+              ReLU-5           [-1, 32, 92, 92]               0
+           Dropout-6           [-1, 32, 92, 92]               0
+         MaxPool2d-7           [-1, 32, 46, 46]               0
+            Conv2d-8           [-1, 64, 46, 46]          18,496
+              ReLU-9           [-1, 64, 46, 46]               0
+          Dropout-10           [-1, 64, 46, 46]               0
+           Conv2d-11           [-1, 64, 46, 46]          36,928
+             ReLU-12           [-1, 64, 46, 46]               0
+          Dropout-13           [-1, 64, 46, 46]               0
+        MaxPool2d-14           [-1, 64, 23, 23]               0
+           Conv2d-15          [-1, 128, 23, 23]          73,856
+             ReLU-16          [-1, 128, 23, 23]               0
+          Dropout-17          [-1, 128, 23, 23]               0
+           Conv2d-18          [-1, 128, 23, 23]         147,584
+             ReLU-19          [-1, 128, 23, 23]               0
+          Dropout-20          [-1, 128, 23, 23]               0
+           Conv2d-21          [-1, 128, 23, 23]         147,584
+             ReLU-22          [-1, 128, 23, 23]               0
+          Dropout-23          [-1, 128, 23, 23]               0
+        MaxPool2d-24          [-1, 128, 12, 12]               0
+           Conv2d-25          [-1, 256, 12, 12]         295,168
+             ReLU-26          [-1, 256, 12, 12]               0
+          Dropout-27          [-1, 256, 12, 12]               0
+           Conv2d-28          [-1, 256, 12, 12]         590,080
+             ReLU-29          [-1, 256, 12, 12]               0
+          Dropout-30          [-1, 256, 12, 12]               0
+           Conv2d-31          [-1, 256, 12, 12]         590,080
+             ReLU-32          [-1, 256, 12, 12]               0
+          Dropout-33          [-1, 256, 12, 12]               0
+        MaxPool2d-34          [-1, 256, 11, 11]               0
+           Conv2d-35          [-1, 256, 11, 11]         590,080
+             ReLU-36          [-1, 256, 11, 11]               0
+          Dropout-37          [-1, 256, 11, 11]               0
+           Conv2d-38          [-1, 256, 11, 11]         590,080
+             ReLU-39          [-1, 256, 11, 11]               0
+          Dropout-40          [-1, 256, 11, 11]               0
+           Conv2d-41          [-1, 256, 11, 11]         590,080
+             ReLU-42          [-1, 256, 11, 11]               0
+          Dropout-43          [-1, 256, 11, 11]               0
+           Conv2d-44           [-1, 21, 92, 92]             693
+          Dropout-45           [-1, 21, 92, 92]               0
+           Conv2d-46           [-1, 21, 46, 46]           1,365
+          Dropout-47           [-1, 21, 46, 46]               0
+           Conv2d-48           [-1, 21, 23, 23]           2,709
+          Dropout-49           [-1, 21, 23, 23]               0
+           Conv2d-50           [-1, 21, 12, 12]           5,397
+          Dropout-51           [-1, 21, 12, 12]               0
+           Conv2d-52           [-1, 21, 11, 11]           5,397
+          Dropout-53           [-1, 21, 11, 11]               0
+           Conv2d-54            [-1, 1, 92, 92]              22
+           Conv2d-55            [-1, 1, 46, 46]              22
+           Conv2d-56            [-1, 1, 23, 23]              22
+           Conv2d-57            [-1, 1, 12, 12]              22
+           Conv2d-58            [-1, 1, 11, 11]              22
+           Conv2d-59            [-1, 1, 92, 92]               6
+================================================================
+Total params: 3,695,261
+Trainable params: 3,695,261
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.03
+Forward/backward pass size (MB): 32.85
+Params size (MB): 14.10
+Estimated Total Size (MB): 46.98
+----------------------------------------------------------------
+/home/anyu/anaconda3/lib/python3.6/site-packages/IPython/core/interactiveshell.py:763: UserWarning: Attempting to work in a virtualenv. If you encounter problems, please install IPython inside the virtualenv.
+  warn("Attempting to work in a virtualenv. If you encounter problems, please "
