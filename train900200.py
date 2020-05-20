@@ -13,8 +13,8 @@ np.random.seed(1)
 random.seed(1)
 
 import cmapy
-from pytorchtools3 import EarlyStopping
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"  # Only GPU 1 is visible to this code
+from pytorchtools import EarlyStopping
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"  # Only GPU 3 is visible to this code
 time1 = time.time()
 # print("RandomBrightnessContrast")
 # modelNo
@@ -22,7 +22,7 @@ time1 = time.time()
 # Deeplab --> 1
 # HED --> 2
 # RCF --> 3
-# CED --> 4
+
 
 # In[2]:
 seismic_path = '/data/anyu/thebetraintest/seistrain.npy'
@@ -38,24 +38,9 @@ fault = np.load(label_path)
 print("load in {} sec".format(time.time()-t_start))
 
 
-# In[4]:
 
-
-# print(seismic.shape, fault.shape)
-# seismic = np.moveaxis(seismic[4:1807],-2,-1)
 print(seismic.shape, fault.shape)
 print(seismic.max(),seismic.min(), fault.max(), fault.min())
-# # reorder input data to same order IL, Z, XL
-
-
-# # In[5]:
-
-
-# seismic = (seismic-seismic.min(axis=(1,2), keepdims=True))/(seismic.max(axis=(1,2), keepdims=True)-seismic.min(axis=(1,2), keepdims=True))
-# print(seismic.shape)
-
-
-# # In[6]:
 
 
 IL, Z, XL = fault.shape
@@ -64,14 +49,14 @@ IL, Z, XL = fault.shape
 # In[7]:
 
 
-best_model_fpath = 'hed_128_64_900200_seed_aug1.model'
+best_model_fpath = 'hed_96_48_900200_seed.model'
 best_iou_threshold=0.5
 epoches = 100
 patience = 20
 im_height = Z
 im_width = XL
-splitsize = 128
-stepsize = 64
+splitsize = 96
+stepsize = 48
 overlapsize = splitsize-stepsize
 pixelThre = int(0.03*splitsize*splitsize)
 print(pixelThre)
@@ -92,18 +77,12 @@ elif modelNo == 2:
     from model_zoo.HED import HED
     model = HED()
     print("use model HED")
-elif modelNo == 21:
-    from model_zoo.HED_crop import HED
-    model = HED(sizeaftercrop=stepsize)
-    print("use model HED")
 elif modelNo == 3:
     from model_zoo.RCF import RCF
     model = RCF()
     print("use model RCF")
 else:
-    from model_zoo.CED import CED
-    model = CED()
-    print("use model CED")
+    print("please print a valid model")
 model.cuda();
 summary(model, (1, splitsize, splitsize))
 
@@ -197,9 +176,7 @@ for i in range(900,1100,1):
     img = seismic[i]
     splits = split_Image(img, True,top_pad,bottom_pad,left_pad,right_pad,splitsize,stepsize,vertical_splits_number,horizontal_splits_number)
     splits = np.delete(splits, no_label_element_index,0) # delete element i along axis 0
-#     print("splits.shape", splits.shape)
     X.extend(splits)
-#     break
 
 print(len(Y))
 print(len(X))
@@ -240,57 +217,32 @@ print("Y_val",Y_val.shape)
 
 # In[ ]:
 
-aug_times = 1
+# aug_times = 1
 
-t_start = time.time()
-origin_train_size = len(X_train)
-print(origin_train_size)
-X_train_aug = np.zeros((origin_train_size*aug_times,splitsize,splitsize,1))
-Y_train_aug = np.zeros((origin_train_size*aug_times,splitsize,splitsize,1))
-for i in range(len(X_train)):
-    for j in range(aug_times):
-        aug = strong_aug(p=1)
-        augmented = aug(image=X_train[i], mask=Y_train[i])
-        X_train_aug[origin_train_size*j + i] = augmented['image']
-        Y_train_aug[origin_train_size*j + i] = augmented['mask']
-print("read images in {} sec".format(time.time()-t_start))
-
-X_train_aug = X_train_aug.astype(np.float32)
-Y_train_aug = Y_train_aug.astype(np.float32)
-if len(X_train)==origin_train_size:
-    X_train = np.append(X_train,X_train_aug, axis=0)
-if len(Y_train)==origin_train_size:
-    Y_train = np.append(Y_train, Y_train_aug, axis=0)
-print("X_train after aug",X_train.shape) 
-print("Y_train after aug",Y_train.shape)
-print("read images in {} sec".format(time.time()-t_start))
-X_train = X_train.astype(np.float32)
-Y_train = Y_train.astype(np.float32)
-# #-----------------------
 # t_start = time.time()
-# origin_val_size = len(X_val)
-# print(origin_val_size)
-# X_val_aug = np.zeros((origin_val_size*aug_times,splitsize,splitsize,1))
-# Y_val_aug = np.zeros((origin_val_size*aug_times,splitsize,splitsize,1))
-# for i in range(len(X_val)):
+# origin_train_size = len(X_train)
+# print(origin_train_size)
+# X_train_aug = np.zeros((origin_train_size*aug_times,splitsize,splitsize,1))
+# Y_train_aug = np.zeros((origin_train_size*aug_times,splitsize,splitsize,1))
+# for i in range(len(X_train)):
 #     for j in range(aug_times):
 #         aug = strong_aug(p=1)
 #         augmented = aug(image=X_train[i], mask=Y_train[i])
-#         X_val_aug[origin_val_size*j + i] = augmented['image']
-#         Y_val_aug[origin_val_size*j + i] = augmented['mask']
+#         X_train_aug[origin_train_size*j + i] = augmented['image']
+#         Y_train_aug[origin_train_size*j + i] = augmented['mask']
 # print("read images in {} sec".format(time.time()-t_start))
 
-# X_val_aug = X_val_aug.astype(np.float32)
-# Y_val_aug = Y_val_aug.astype(np.float32)
-# if len(X_val)==origin_val_size:
-#     X_val = np.append(X_val,X_val_aug, axis=0)
-# if len(Y_val)==origin_val_size:
-#     Y_val = np.append(Y_val, Y_val_aug, axis=0)
-# print("X_val after aug",X_val.shape) 
-# print("Y_val after aug",Y_val.shape)
+# X_train_aug = X_train_aug.astype(np.float32)
+# Y_train_aug = Y_train_aug.astype(np.float32)
+# if len(X_train)==origin_train_size:
+#     X_train = np.append(X_train,X_train_aug, axis=0)
+# if len(Y_train)==origin_train_size:
+#     Y_train = np.append(Y_train, Y_train_aug, axis=0)
+# print("X_train after aug",X_train.shape) 
+# print("Y_train after aug",Y_train.shape)
 # print("read images in {} sec".format(time.time()-t_start))
-# X_val = X_val.astype(np.float32)
-# Y_val = Y_val.astype(np.float32)
+# X_train = X_train.astype(np.float32)
+# Y_train = Y_train.astype(np.float32)
 #-----------------------
 X_train = np.moveaxis(X_train,-1,1)
 Y_train = np.moveaxis(Y_train,-1,1)
@@ -323,8 +275,6 @@ class faultsDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, idx):
         image = self.images[idx]
-#         mask = None
-# #         if self.train:
         mask = self.masks[idx]
         return (image, mask)
 
@@ -334,7 +284,7 @@ class faultsDataset(torch.utils.data.Dataset):
 
 faults_dataset_train = faultsDataset(X_train, train=True, preprocessed_masks=Y_train)
 faults_dataset_val = faultsDataset(X_val, train=False, preprocessed_masks=Y_val)
-# faults_dataset_test = faultsDataset(X_test, train=False, preprocessed_masks=Y_test)
+
 
 batch_size = 64 
 
@@ -346,25 +296,12 @@ val_loader = torch.utils.data.DataLoader(dataset=faults_dataset_val,
                                            batch_size=batch_size, 
                                            shuffle=False)
 
-# test_loader = torch.utils.data.DataLoader(dataset=faults_dataset_test, 
-#                                            batch_size=batch_size, 
-#                                            shuffle=False)
 
-
-# In[ ]:
-
-
-
-# criterion = nn.BCEWithLogitsLoss()
-# learning_rate = 0.01
 optimizer = torch.optim.SGD(model.parameters(), lr=1e-6, momentum=0.9, weight_decay=0.0002)
 print("optimizer = torch.optim.SGD(model.parameters(), lr=1e-6, momentum=0.9, weight_decay=0.0002)")
 if modelNo == 0 or modelNo == 1:
     print("optimizer = torch.optim.Adam(model.parameters(), lr=0.01)")
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-elif modelNo == 4:
-    optimizer = torch.optim.SGD(model.parameters(), lr=1e-5, momentum=0.99, weight_decay=0.0002)
-    print("optimizer = torch.optim.SGD(model.parameters(), lr=1e-5, momentum=0.99, weight_decay=0.0002)")
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min',factor=0.1, patience=5, verbose=True)
 
 
@@ -390,18 +327,13 @@ for epoch in range(epoches):
         torch.cuda.empty_cache()
         images = Variable(images.cuda())
         masks = Variable(masks.cuda())
-        if modelNo == 21:
-            masks = crop(masks,stepsize,stepsize)
         outputs = model(images)
         
         loss = torch.zeros(1).cuda()
         y_preds = outputs
-        if modelNo == 0 or modelNo == 1 or modelNo == 4:
-#             print("bceloss")
-            loss = bceloss(outputs, masks)
-#             loss = cross_entropy_loss_HED(outputs, masks)
-#             loss = nn.BCEWithLogitsLoss(outputs, masks) 
-        elif modelNo == 2 or modelNo == 21:
+        if modelNo == 0 or modelNo == 1:
+            loss = bceloss(outputs, masks) 
+        elif modelNo == 2:
             for o in range(5):
                 loss = loss + cross_entropy_loss_HED(outputs[o], masks)
             loss = loss + bceloss(outputs[-1],masks)
@@ -424,22 +356,17 @@ for epoch in range(epoches):
         torch.cuda.empty_cache()
         images = Variable(images.cuda())
         masks = Variable(masks.cuda())
-        if modelNo == 21:
-            masks = crop(masks,stepsize,stepsize) 
         outputs = model(images)
         
         loss = torch.zeros(1).cuda()
         y_preds = outputs
-        if modelNo == 0 or modelNo == 1 or modelNo == 4:
-#             print("bceloss")
-            loss = bceloss(outputs, masks)
-#             loss = cross_entropy_loss_HED(outputs, masks)
-#             loss = nn.BCEWithLogitsLoss(outputs, masks) 
-        elif modelNo == 2 or modelNo == 21:
+        if modelNo == 0 or modelNo == 1:
+            loss = bceloss(outputs, masks) 
+        elif modelNo == 2:
             for o in range(5):
                 loss = loss + cross_entropy_loss_HED(outputs[o], masks)
             loss = loss + bceloss(outputs[-1],masks)
-            y_preds = outputs[-1]#(outputs[0]+outputs[1]+outputs[2]+outputs[3]+outputs[4]+outputs[5])/len(outputs)
+            y_preds = outputs[-1]
         elif modelNo == 3:
             for o in outputs:
                 loss = loss + cross_entropy_loss_RCF(o, masks)
@@ -449,11 +376,6 @@ for epoch in range(epoches):
         val_acc = iou_pytorch(predicted_mask.byte(), masks.squeeze(1).byte())
         val_accuracies.append(val_acc.mean())
 
-#         todelete = torch.sum(masks,dim=(2,3))<1
-#         no_label_element_index = list(compress(range(len(todelete)), todelete))
-# #         print(no_label_element_index)
-#         labelled_val_acc = np.delete(val_acc, no_label_element_index,0) 
-#         labelled_val_accuracies.extend(labelled_val_acc)
         
     mean_train_losses.append(torch.mean(torch.stack(train_losses)))
     mean_val_losses.append(torch.mean(torch.stack(val_losses)))
@@ -463,19 +385,13 @@ for epoch in range(epoches):
     scheduler.step(torch.mean(torch.stack(val_losses)))    
     early_stopping(torch.mean(torch.stack(val_losses)), model, best_model_fpath)
     
-#     mean_train_losses.append(np.mean(train_losses))
-#     mean_val_losses.append(np.mean(val_losses))
-#     mean_train_accuracies.append(np.mean(train_accuracies))
-#     mean_val_accuracies.append(np.mean(val_accuracies))
-#     scheduler.step(np.mean(val_losses))   
-#     early_stopping(np.mean(val_losses), model, best_model_fpath)
+
 
     if early_stopping.early_stop:
         print("Early stopping")
         break
         
-#     # load the last checkpoint with the best model
-#     model.load_state_dict(torch.load('checkpoint.pt'))
+
     torch.cuda.empty_cache()
     
     for param_group in optimizer.param_groups:
@@ -484,17 +400,12 @@ for epoch in range(epoches):
     
     # Print Epoch results
     t_end = time.time()
-#     print('Epoch: {}. Train Loss: {}. Val Loss: {}. Train IoU: {}. Val IoU: {}. Time: {}. LR: {}'
-#           .format(epoch+1, np.mean(train_losses), np.mean(val_losses), torch.mean(torch.stack(train_accuracies)).item(), torch.mean(torch.stack(val_accuracies)).item(), t_end-t_start, learningRate))
-#     t_start = time.time()
-#     print('Epoch: {}. Train Loss: {}. Val Loss: {}. Train IoU: {}. Val IoU: {}. Labelled Val IoU: {}. Time: {}. LR: {}'
-#           .format(epoch+1, np.mean(train_losses), np.mean(val_losses),np.mean(train_accuracies), np.mean(val_accuracies), np.mean(labelled_val_accuracies), t_end-t_start, learningRate))
+
     print('Epoch: {}. Train Loss: {}. Val Loss: {}. Train IoU: {}. Val IoU: {}. Time: {}. LR: {}'
           .format(epoch+1, torch.mean(torch.stack(train_losses)), torch.mean(torch.stack(val_losses)), torch.mean(torch.stack(train_accuracies)), torch.mean(torch.stack(val_accuracies)), t_end-t_start, learningRate))
     
     t_start = time.time()
-    
-#     torch.save(model.state_dict(), best_model_fpath)
+
 
 
 # In[ ]:
