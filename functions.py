@@ -1,16 +1,11 @@
 
 # coding: utf-8
 
-# In[1]:
-
-
-# https://www.kaggle.com/erikistre/pytorch-basic-u-net
-
 import time
 import cv2 #bgr order
 import math
 from itertools import compress,product
-from skimage import color # rgb order
+# from skimage import color # rgb order
 from skimage.util.shape import view_as_windows
 from typing import Tuple
 
@@ -21,7 +16,6 @@ plt.switch_backend('agg')
 import numpy as np  
 import scipy.signal
 import pandas as pd
-
 
 import torch
 import torch.nn as nn
@@ -34,17 +28,10 @@ import random
 import os
 from os.path import isfile, join
 
-
-
-
 from albumentations import (
     HorizontalFlip, VerticalFlip, CLAHE,
-    ShiftScaleRotate, OpticalDistortion, GridDistortion, ElasticTransform, HueSaturationValue,
-    RandomBrightnessContrast, IAAPiecewiseAffine,
-    IAASharpen, IAAEmboss, Flip, OneOf, Compose, IAASuperpixels
-
-)
-
+    ShiftScaleRotate, OpticalDistortion, GridDistortion, ElasticTransform,
+    RandomBrightnessContrast, IAASharpen, IAAEmboss, Flip, OneOf, Compose)
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -60,10 +47,9 @@ def cross_entropy_loss_HED(prediction, label):
 
     mask[mask == 1] = 1.0 * num_negative / (num_positive + num_negative)
     mask[mask == 0] = 1.0 * num_positive / (num_positive + num_negative)
-#     mask[mask == 2] = 0
     cost = torch.nn.functional.binary_cross_entropy(
             prediction.float(),label.float(), weight=mask, reduce=False)
-    return torch.mean(cost) #torch.sum(cost)
+    return torch.sum(cost) #torch.mean(cost)
 
 def cross_entropy_loss_RCF(prediction, label):
     label = label.long()
@@ -73,10 +59,9 @@ def cross_entropy_loss_RCF(prediction, label):
 
     mask[mask == 1] = 1.0 * num_negative / (num_positive + num_negative)
     mask[mask == 0] = 1.1 * num_positive / (num_positive + num_negative)
-#     mask[mask == 2] = 0
     cost = torch.nn.functional.binary_cross_entropy(
             prediction.float(),label.float(), weight=mask, reduce=False)
-    return torch.mean(cost) #torch.sum(cost)
+    return torch.sum(cost) #torch.mean(cost)
 
 
 def split_Image(bigImage,isMask,top_pad,bottom_pad,left_pad,right_pad,splitsize,stepsize,vertical_splits_number,horizontal_splits_number):
@@ -230,7 +215,7 @@ def crop2(variable, th, tw): # this is for crop center when outputs are 96*96
         y1 = int(round((h - th) / 2.))
         return variable[:, :, y1 : y1 + th, x1 : x1 + tw]
 
-
+#https://blog.csdn.net/qq_15602569/article/details/79565402 
 def acc_metrics(outputs, labels):
     TP=0
     TN=0
@@ -250,12 +235,6 @@ def acc_metrics(outputs, labels):
     acc = (TP + TN) / (TP + TN + FP + FN)
     
     return p,r,F1,acc
-
-# --------------------- 
-# 作者：Link2Link 
-# 来源：CSDN 
-# 原文：https://blog.csdn.net/qq_15602569/article/details/79565402 
-# 版权声明：本文为博主原创文章，转载请附上博文链接！
 
 
 
