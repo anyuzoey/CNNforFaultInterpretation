@@ -25,9 +25,13 @@ augmentation_examples.ipynb can used to generate different augmentation examples
 Comparative results with two related works (Wu et al's faultSeg3D model and Cunha et al's Transfer learning model) are also made aviable to illustrated how we compare our work with their works. 
 
 Comprison with Wu et al's faultSeg3D model is stored in faultSeg folder
+    
     we modified prediction.ipynb, predNew.ipynb, train.py
+    
     we added prepare_3Dcube_Thebe_Dataset.ipynb and trianThebe.out 
+
 comprison with Cunha et al's transfer learning model is store in SFD-CNN-TL folder
+    
     we added folder/file: finetune.ipynb, predictNew.ipynb, classifyAndMetricsGSB-compare.ipynb, GSB_predictions, gsbData, xl2800realgt.npy
 
 # Dataset
