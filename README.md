@@ -31,10 +31,7 @@ comprison with Cunha et al's transfer learning model is store in SFD-CNN-TL fold
     we added folder/file: finetune.ipynb, predictNew.ipynb, classifyAndMetricsGSB-compare.ipynb, GSB_predictions, gsbData, xl2800realgt.npy
 
 # Dataset
-The dataset used in this paper is a multi-megabytes dataset, please download it through the link provided in the paper. (The link will added here once the paper is published).
-
-Gdrive works well to download files from google drive
-'gdown https://drive.google.com/uc?id=FILE-ID'
+The dataset used in this paper is a multi-megabytes dataset, please download it through the link provided in the paper. To access the original dataset, please check our data paper "A gigabyte interpreted seismic dataset for automatic fault recognition"
 
 
 # License
