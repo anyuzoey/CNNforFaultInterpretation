@@ -37,6 +37,8 @@ comprison with Cunha et al's transfer learning model is store in SFD-CNN-TL fold
 # Dataset
 The dataset used in this paper is a multi-megabytes dataset, please download it through the link provided in the paper. To access the original dataset, please check our data paper "A gigabyte interpreted seismic dataset for automatic fault recognition"
 
+more about converting segy to numpy can be found in link: https://github.com/anyuzoey/SEGY2NUMPY 
+
 
 # License
 This project is licensed under the GNU General Public License v3.0 - see the LICENSE.md file for details
