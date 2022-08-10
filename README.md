@@ -35,7 +35,12 @@ comprison with Cunha et al's transfer learning model is store in SFD-CNN-TL fold
     we added folder/file: finetune.ipynb, predictNew.ipynb, classifyAndMetricsGSB-compare.ipynb, GSB_predictions, gsbData, xl2800realgt.npy
 
 # Dataset
-The dataset used in this paper is a multi-megabytes dataset, please download it through the link provided in the paper. To access the original dataset, please check our data paper "A gigabyte interpreted seismic dataset for automatic fault recognition"
+The dataset used in this paper is a multi-megabytes dataset, please download it through the link provided in the paper. (the dataset was deleted by mistake, will upload again later.) To access the original dataset, please check our data paper "A gigabyte interpreted seismic dataset for automatic fault recognition" or by link: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YBYGBK
+To reproduce the same processed seismic dataset used in this paper, please download all seismic and fault annotation files in above dataverse link. and process it using: https://github.com/anyuzoey/CNNforFaultInterpretation/blob/master/generatePatchipyTrainValTest.ipynb
+
+seismictrain.npy are splited into 9 files in datavese data repo. similar for faulttrain.npy.
+You can merge the 9 seismictrain files to seismictrain.npy. 
+
 
 more about converting segy to numpy can be found in link: https://github.com/anyuzoey/SEGY2NUMPY 
 
